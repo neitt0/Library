@@ -4,7 +4,10 @@ const addBookDialog = document.querySelector(".addBookDialog");
 const dialogSubmit = document.querySelector(".dialogSubmit");
 const dialogCancel = document.querySelector(".dialogCancel");
 const dialogForm = document.querySelector(".addBookDialog form");
+const shelves = document.querySelector(".shelves");
+
 let delBookBtn;
+
 const bookList = [
   {
     title: "Fahrenheit 451",
@@ -40,6 +43,8 @@ dialogSubmit.addEventListener("click", (e) => {
   displayBooks();
 });
 
+displayBooks();
+
 const theHobbit = new Book(
   "The Hobbit",
   "J. R. R. Tolkien",
@@ -48,6 +53,7 @@ const theHobbit = new Book(
   "https://m.media-amazon.com/images/I/712cDO7d73L._AC_UF1000,1000_QL80_DpWeblab_.jpg"
 );
 bookList.push(theHobbit);
+displayBooks();
 
 function Book(title, author, pages, readStatus, imgUrl) {
   this.title = title;
@@ -87,16 +93,17 @@ function displayBooks() {
 
     mainArticles.appendChild(tempDiv);
   }
+
   delBookBtn = document.querySelectorAll(".deleteBook");
-  console.log(delBookBtn);
+  for (let i = 0; i < delBookBtn.length; i++) {
+    delBookBtn[i].addEventListener("click", () => {
+      bookList.splice(i, 1);
+      delBookBtn[i].parentElement.remove();
+
+      displayBooks();
+
+      console.log(bookList);
+      console.log(delBookBtn);
+    });
+  }
 }
-
-displayBooks();
-
-delBookBtn.forEach((btn) => {
-  console.log(btn);
-  btn.addEventListener("click", () => {
-    console.log(btn.parentElement);
-    btn.parentElement.remove();
-  });
-});
