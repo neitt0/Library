@@ -7,6 +7,7 @@ const dialogForm = document.querySelector(".addBookDialog form");
 const shelves = document.querySelector(".shelves");
 
 let delBookBtn;
+let readBookBtn;
 
 const bookList = [
   {
@@ -91,19 +92,31 @@ function displayBooks() {
     delBtn.innerText = "delete";
     tempDiv.append(delBtn);
 
+    let readBtn = document.createElement("button");
+    readBtn.classList.add("changeReadStat");
+    readBtn.innerText = "read";
+    tempDiv.append(readBtn);
+
     mainArticles.appendChild(tempDiv);
   }
 
   delBookBtn = document.querySelectorAll(".deleteBook");
-  for (let i = 0; i < delBookBtn.length; i++) {
+  readBookBtn = document.querySelectorAll(".changeReadStat");
+  for (let i = 0; i < bookList.length; i++) {
     delBookBtn[i].addEventListener("click", () => {
       bookList.splice(i, 1);
       delBookBtn[i].parentElement.remove();
 
-      displayBooks();
-
-      console.log(bookList);
       console.log(delBookBtn);
+      return displayBooks();
+    });
+
+    readBookBtn[i].addEventListener("click", () => {
+      bookList[i].readStatus
+        ? (bookList[i].readStatus = false)
+        : (bookList[i].readStatus = true);
+
+      return displayBooks();
     });
   }
 }
