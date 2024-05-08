@@ -4,7 +4,7 @@ const addBookDialog = document.querySelector(".addBookDialog");
 const dialogSubmit = document.querySelector(".dialogSubmit");
 const dialogCancel = document.querySelector(".dialogCancel");
 const dialogForm = document.querySelector(".addBookDialog form");
-
+let delBookBtn;
 const bookList = [
   {
     title: "Fahrenheit 451",
@@ -80,9 +80,23 @@ function displayBooks() {
       p.innerText = book[prop];
       tempDiv.appendChild(p);
     }
+    let delBtn = document.createElement("button");
+    delBtn.classList.add("deleteBook");
+    delBtn.innerText = "delete";
+    tempDiv.append(delBtn);
 
     mainArticles.appendChild(tempDiv);
   }
+  delBookBtn = document.querySelectorAll(".deleteBook");
+  console.log(delBookBtn);
 }
 
 displayBooks();
+
+delBookBtn.forEach((btn) => {
+  console.log(btn);
+  btn.addEventListener("click", () => {
+    console.log(btn.parentElement);
+    btn.parentElement.remove();
+  });
+});
