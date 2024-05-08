@@ -1,4 +1,9 @@
 const mainArticles = document.querySelector(".shelves");
+const addBookBtn = document.querySelector(".addBookBtn");
+const addBookDialog = document.querySelector(".addBookDialog");
+const dialogSubmit = document.querySelector(".dialogSubmit");
+const dialogCancel = document.querySelector(".dialogCancel");
+const dialogForm = document.querySelector(".addBookDialog form");
 
 const bookList = [
   {
@@ -11,6 +16,30 @@ const bookList = [
   },
 ];
 
+addBookBtn.addEventListener("click", (e) => {
+  addBookDialog.showModal();
+});
+
+dialogCancel.addEventListener("click", (e) => {
+  e.preventDefault();
+  addBookDialog.close();
+});
+
+dialogSubmit.addEventListener("click", (e) => {
+  e.preventDefault();
+  let data = new FormData(document.querySelector(".addBookDialog form"));
+  let newBook = new Book();
+
+  for (let [key, value] of data) {
+    newBook[key] = value;
+  }
+  bookList.push(newBook);
+
+  addBookDialog.close();
+  dialogForm.reset();
+  displayBooks();
+});
+
 const theHobbit = new Book(
   "The Hobbit",
   "J. R. R. Tolkien",
@@ -19,7 +48,6 @@ const theHobbit = new Book(
   "https://m.media-amazon.com/images/I/712cDO7d73L._AC_UF1000,1000_QL80_DpWeblab_.jpg"
 );
 bookList.push(theHobbit);
-console.log(bookList);
 
 function Book(title, author, pages, readStatus, imgUrl) {
   this.title = title;

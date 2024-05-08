@@ -3,3 +3,27 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+button,
+legend {
+  appearance: none;
+}
+
+dialog {
+  margin: auto;
+  padding: 20px;
+  width: 500px;
+}
+
+form {
+  display: block;
+  /* flex-direction: row; */
+}
+
+dialog div {
+  margin-bottom: 10px;
+}
+
+.shelves div img {
+  width: 200px;
+}

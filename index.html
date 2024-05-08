@@ -14,15 +14,44 @@
 
     <section class="shelves"></section>
 
-    <dialog>
+    <dialog class="addBookDialog">
       <form method="dialog">
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title" />
-        <label for="author">Author:</label>
-        <input type="text" name="author" id="author" />
+        <div>
+          <label for="title">Title:</label>
+          <input type="text" name="title" id="title" />
+        </div>
 
-        <button type="submit">Submit</button>
+        <div>
+          <label for="author">Author:</label>
+          <input type="text" name="author" id="author" />
+        </div>
+
+        <div>
+          <label for="pages">Pages:</label>
+          <input type="number" name="pages" id="pages" />
+        </div>
+
+        <div>
+          <fieldset>
+            <legend>Read Status:</legend>
+            <input type="radio" name="readStatus" id="true" value="true" />
+            <label for="true">True</label>
+            <input type="radio" name="readStatus" id="false" value="false" />
+            <label for="false">False</label>
+          </fieldset>
+        </div>
+
+        <div>
+          <label for="imgUrl">Image Url:</label>
+          <input type="text" name="imgUrl" id="imgUrl" />
+        </div>
+
+        <div>
+          <button class="dialogCancel" type="submit">Cancel</button>
+          <button class="dialogSubmit" type="submit">Submit</button>
+        </div>
       </form>
     </dialog>
+    <button class="addBookBtn">Add Book</button>
   </body>
 </html>
