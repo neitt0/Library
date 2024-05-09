@@ -9,6 +9,7 @@ const shelves = document.querySelector(".shelves");
 let delBookBtn;
 let readBookBtn;
 
+// Initialize list
 const bookList = [
   {
     title: "Fahrenheit 451",
@@ -24,16 +25,20 @@ addBookBtn.addEventListener("click", (e) => {
   addBookDialog.showModal();
 });
 
+// Cancel without submitting button
 dialogCancel.addEventListener("click", (e) => {
   e.preventDefault();
   addBookDialog.close();
 });
 
+// Submit button
 dialogSubmit.addEventListener("click", (e) => {
   e.preventDefault();
+  // Get data through FormData
   let data = new FormData(document.querySelector(".addBookDialog form"));
   let newBook = new Book();
 
+  // iterate through FormData using key/value pair
   for (let [key, value] of data) {
     newBook[key] = value;
   }
@@ -44,6 +49,7 @@ dialogSubmit.addEventListener("click", (e) => {
   displayBooks();
 });
 
+// Initialize book display
 displayBooks();
 
 const theHobbit = new Book(
@@ -54,8 +60,10 @@ const theHobbit = new Book(
   "https://m.media-amazon.com/images/I/712cDO7d73L._AC_UF1000,1000_QL80_DpWeblab_.jpg"
 );
 bookList.push(theHobbit);
+// Updates book display
 displayBooks();
 
+// Change pages > int and readstatus > bool when working with it
 function Book(title, author, pages, readStatus, imgUrl) {
   this.title = title;
   this.author = author;
@@ -74,6 +82,7 @@ function displayBooks() {
     let tempDiv = document.createElement("div");
 
     for (let prop in book) {
+      // unique props
       if (typeof book[prop] == "function") {
         continue;
       } else if (prop == "imgUrl") {
@@ -83,6 +92,7 @@ function displayBooks() {
         continue;
       }
 
+      // everything else goes into p
       let p = document.createElement("p");
       p.innerText = book[prop];
       tempDiv.appendChild(p);
@@ -100,21 +110,26 @@ function displayBooks() {
     mainArticles.appendChild(tempDiv);
   }
 
+  // Delete and Read book buttons
   delBookBtn = document.querySelectorAll(".deleteBook");
   readBookBtn = document.querySelectorAll(".changeReadStat");
+  // Used for i loop to target with the DOM and the main array
   for (let i = 0; i < bookList.length; i++) {
     delBookBtn[i].addEventListener("click", () => {
       bookList.splice(i, 1);
       delBookBtn[i].parentElement.remove();
 
-      console.log(delBookBtn);
+      // Updates the list so iteration targets the correct element and object properties
       return displayBooks();
     });
 
     readBookBtn[i].addEventListener("click", () => {
-      bookList[i].readStatus
-        ? (bookList[i].readStatus = false)
-        : (bookList[i].readStatus = true);
+      // Converts string to boolean
+      console.log(Boolean(bookList[i].readStatus));
+      if (typeof bookList[i].readStatus !== "boolean") {
+        bookList[i].readStatus = !bookList[i].readStatus;
+      }
+      bookList[i].readStatus = !bookList[i].readStatus;
 
       return displayBooks();
     });
